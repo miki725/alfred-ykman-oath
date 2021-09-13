@@ -174,7 +174,7 @@ print(
 				<key>script</key>
 				<string>PATH=/usr/local/bin:/opt/homebrew/bin:$PATH
 set -e
-ykman oath accounts code {query} | awk '{print ($NF)}' | tr -d '\n'</string>
+ykman oath accounts code "{query}" | awk '{print ($NF)}' | tr -d '\n'</string>
 				<key>scriptargtype</key>
 				<integer>0</integer>
 				<key>scriptfile</key>
