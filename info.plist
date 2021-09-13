@@ -5,9 +5,22 @@
 	<key>bundleid</key>
 	<string>re.mntw.yo</string>
 	<key>category</key>
-	<string>Tools</string>
+	<string>Productivity</string>
 	<key>connections</key>
 	<dict>
+		<key>040E6BBD-6C5D-4E99-B602-45913E67114E</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>CF270F6B-F2EB-40F8-AB13-25E3FE08927E</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>995D2BA4-5863-487C-8374-30A06870C7E8</key>
 		<array>
 			<dict>
@@ -34,6 +47,19 @@
 				<false/>
 			</dict>
 		</array>
+		<key>CF270F6B-F2EB-40F8-AB13-25E3FE08927E</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>534E5406-BA0C-41AB-92ED-764B811CAFE1</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 	</dict>
 	<key>createdby</key>
 	<string>Andrii Yurchuk</string>
@@ -48,8 +74,29 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>alfredfiltersresults</key>
+				<key>count</key>
+				<integer>1</integer>
+				<key>keychar</key>
+				<string>v</string>
+				<key>keycode</key>
+				<integer>-1</integer>
+				<key>keymod</key>
+				<integer>1048576</integer>
+				<key>overridewithargument</key>
 				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.dispatchkeycombo</string>
+			<key>uid</key>
+			<string>534E5406-BA0C-41AB-92ED-764B811CAFE1</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
 				<integer>0</integer>
 				<key>argumenttreatemptyqueryasnil</key>
@@ -71,11 +118,32 @@
 				<key>queuemode</key>
 				<integer>1</integer>
 				<key>runningsubtext</key>
-				<string></string>
+				<string>loading TOTP sites</string>
 				<key>script</key>
-				<string>PATH=/usr/local/bin:/opt/homebrew/bin:$PATH
+				<string>set -eo pipefail
 
-python3 list_codes.py "{query}"</string>
+export PATH=/usr/local/bin:/opt/homebrew/bin:$PATH
+
+ykman oath accounts list | python -c '
+import sys
+import re
+import json
+print(
+  json.dumps(
+    {
+      "items": [
+        {
+          "uid": result,
+          "title": result,
+          "arg": result,
+          "match": " ".join(set(re.split("[. /\-:]", result))) + " " + result,
+          "autocomplete": result
+        } for result in sys.stdin.read().splitlines()
+      ]
+    },
+    indent=2,
+  )
+)'</string>
 				<key>scriptargtype</key>
 				<integer>0</integer>
 				<key>scriptfile</key>
@@ -105,8 +173,8 @@ python3 list_codes.py "{query}"</string>
 				<integer>68</integer>
 				<key>script</key>
 				<string>PATH=/usr/local/bin:/opt/homebrew/bin:$PATH
-
-bash get_code.sh "{query}"</string>
+set -e
+ykman oath accounts code {query} | awk '{print ($NF)}' | tr -d '\n'</string>
 				<key>scriptargtype</key>
 				<integer>0</integer>
 				<key>scriptfile</key>
@@ -140,6 +208,27 @@ bash get_code.sh "{query}"</string>
 			<key>version</key>
 			<integer>3</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<true/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>Copied TOTP</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>CF270F6B-F2EB-40F8-AB13-25E3FE08927E</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>Obtain a TOTP code from a YubiKey
@@ -152,21 +241,35 @@ More info: https://github.com/Ch00k/alfred-ykman-oath</string>
 		<key>040E6BBD-6C5D-4E99-B602-45913E67114E</key>
 		<dict>
 			<key>xpos</key>
-			<integer>510</integer>
+			<integer>450</integer>
 			<key>ypos</key>
-			<integer>115</integer>
+			<integer>110</integer>
+		</dict>
+		<key>534E5406-BA0C-41AB-92ED-764B811CAFE1</key>
+		<dict>
+			<key>xpos</key>
+			<integer>825</integer>
+			<key>ypos</key>
+			<integer>110</integer>
 		</dict>
 		<key>995D2BA4-5863-487C-8374-30A06870C7E8</key>
 		<dict>
 			<key>xpos</key>
-			<integer>30</integer>
+			<integer>75</integer>
 			<key>ypos</key>
 			<integer>110</integer>
 		</dict>
 		<key>C5ACC126-270B-459E-A7BC-5A83C350EBA6</key>
 		<dict>
 			<key>xpos</key>
-			<integer>260</integer>
+			<integer>265</integer>
+			<key>ypos</key>
+			<integer>110</integer>
+		</dict>
+		<key>CF270F6B-F2EB-40F8-AB13-25E3FE08927E</key>
+		<dict>
+			<key>xpos</key>
+			<integer>635</integer>
 			<key>ypos</key>
 			<integer>110</integer>
 		</dict>
