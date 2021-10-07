@@ -4,8 +4,6 @@
 <dict>
 	<key>bundleid</key>
 	<string>re.mntw.yo</string>
-	<key>category</key>
-	<string>Productivity</string>
 	<key>connections</key>
 	<dict>
 		<key>040E6BBD-6C5D-4E99-B602-45913E67114E</key>
@@ -13,6 +11,42 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>CF270F6B-F2EB-40F8-AB13-25E3FE08927E</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>79960033-BE3B-42CA-861F-EB7AB516A908</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>664A37F3-F9CD-4FF2-BA9A-CADD665C01E2</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>A5818618-66DD-47EC-9638-3ADAA8292713</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>79960033-BE3B-42CA-861F-EB7AB516A908</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>664A37F3-F9CD-4FF2-BA9A-CADD665C01E2</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -74,27 +108,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>count</key>
-				<integer>1</integer>
-				<key>keychar</key>
-				<string>v</string>
-				<key>keycode</key>
-				<integer>-1</integer>
-				<key>keymod</key>
-				<integer>1048576</integer>
-				<key>overridewithargument</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.dispatchkeycombo</string>
-			<key>uid</key>
-			<string>534E5406-BA0C-41AB-92ED-764B811CAFE1</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>alfredfiltersresults</key>
 				<true/>
 				<key>alfredfiltersresultsmatchmode</key>
@@ -123,6 +136,10 @@
 				<string>set -eo pipefail
 
 export PATH=/usr/local/bin:/opt/homebrew/bin:$PATH
+
+if [ -n "$(pgrep gpg-agent)" ]; then
+	gpgconf --kill gpg-agent
+fi
 
 ykman oath accounts list | python -c '
 import sys
@@ -167,6 +184,25 @@ print(
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>autopaste</key>
+				<false/>
+				<key>clipboardtext</key>
+				<string>{query}</string>
+				<key>ignoredynamicplaceholders</key>
+				<false/>
+				<key>transient</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.clipboard</string>
+			<key>uid</key>
+			<string>040E6BBD-6C5D-4E99-B602-45913E67114E</string>
+			<key>version</key>
+			<integer>3</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
@@ -192,25 +228,6 @@ ykman oath accounts code "{query}" | awk '{print ($NF)}' | tr -d '\n'</string>
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>autopaste</key>
-				<false/>
-				<key>clipboardtext</key>
-				<string>{query}</string>
-				<key>ignoredynamicplaceholders</key>
-				<false/>
-				<key>transient</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.output.clipboard</string>
-			<key>uid</key>
-			<string>040E6BBD-6C5D-4E99-B602-45913E67114E</string>
-			<key>version</key>
-			<integer>3</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>lastpathcomponent</key>
 				<false/>
 				<key>onlyshowifquerypopulated</key>
@@ -226,6 +243,88 @@ ykman oath accounts code "{query}" | awk '{print ($NF)}' | tr -d '\n'</string>
 			<string>alfred.workflow.output.notification</string>
 			<key>uid</key>
 			<string>CF270F6B-F2EB-40F8-AB13-25E3FE08927E</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>count</key>
+				<integer>1</integer>
+				<key>keychar</key>
+				<string>v</string>
+				<key>keycode</key>
+				<integer>-1</integer>
+				<key>keymod</key>
+				<integer>1048576</integer>
+				<key>overridewithargument</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.dispatchkeycombo</string>
+			<key>uid</key>
+			<string>534E5406-BA0C-41AB-92ED-764B811CAFE1</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>concurrently</key>
+				<false/>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>script</key>
+				<string>export PATH=/usr/local/bin:$PATH
+
+if [ -z "$(pgrep gpg-agent)" ]; then
+	gpg-agent --homedir $HOME/.gnupg --use-standard-socket --daemon
+fi</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>type</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.script</string>
+			<key>uid</key>
+			<string>664A37F3-F9CD-4FF2-BA9A-CADD665C01E2</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>lastpathcomponent</key>
+				<false/>
+				<key>onlyshowifquerypopulated</key>
+				<false/>
+				<key>removeextension</key>
+				<false/>
+				<key>text</key>
+				<string></string>
+				<key>title</key>
+				<string>GPG Agent Started</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.output.notification</string>
+			<key>uid</key>
+			<string>A5818618-66DD-47EC-9638-3ADAA8292713</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>seconds</key>
+				<string>5</string>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.utility.delay</string>
+			<key>uid</key>
+			<string>79960033-BE3B-42CA-861F-EB7AB516A908</string>
 			<key>version</key>
 			<integer>1</integer>
 		</dict>
@@ -252,12 +351,33 @@ More info: https://github.com/Ch00k/alfred-ykman-oath</string>
 			<key>ypos</key>
 			<integer>110</integer>
 		</dict>
+		<key>664A37F3-F9CD-4FF2-BA9A-CADD665C01E2</key>
+		<dict>
+			<key>xpos</key>
+			<integer>455</integer>
+			<key>ypos</key>
+			<integer>300</integer>
+		</dict>
+		<key>79960033-BE3B-42CA-861F-EB7AB516A908</key>
+		<dict>
+			<key>xpos</key>
+			<integer>315</integer>
+			<key>ypos</key>
+			<integer>330</integer>
+		</dict>
 		<key>995D2BA4-5863-487C-8374-30A06870C7E8</key>
 		<dict>
 			<key>xpos</key>
 			<integer>75</integer>
 			<key>ypos</key>
 			<integer>110</integer>
+		</dict>
+		<key>A5818618-66DD-47EC-9638-3ADAA8292713</key>
+		<dict>
+			<key>xpos</key>
+			<integer>640</integer>
+			<key>ypos</key>
+			<integer>300</integer>
 		</dict>
 		<key>C5ACC126-270B-459E-A7BC-5A83C350EBA6</key>
 		<dict>
