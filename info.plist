@@ -319,7 +319,7 @@ fi</string>
 			<key>config</key>
 			<dict>
 				<key>seconds</key>
-				<string>5</string>
+				<string>1</string>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.utility.delay</string>
