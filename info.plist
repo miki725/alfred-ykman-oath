@@ -141,7 +141,7 @@ if [ -n "$(pgrep gpg-agent)" ]; then
 	gpgconf --kill gpg-agent
 fi
 
-ykman oath accounts list | python -c '
+ykman oath accounts list | python3 -c '
 import sys
 import re
 import json
