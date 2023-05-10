@@ -214,6 +214,9 @@ fi</string>
 				<key>script</key>
 				<string>PATH=/usr/local/bin:/opt/homebrew/bin:$PATH
 set -e
+if [ -n "$(pgrep gpg-agent)" ]; then
+	gpgconf --kill gpg-agent
+fi
 ykman oath accounts code "{query}" | awk '{print ($NF)}' | tr -d '\n'</string>
 				<key>scriptargtype</key>
 				<integer>0</integer>
