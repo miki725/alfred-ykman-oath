@@ -160,7 +160,11 @@ print(
     },
     indent=2,
   )
-)'</string>
+)'
+
+if [ -z "$(pgrep gpg-agent)" ]; then
+	gpg-agent --homedir $HOME/.gnupg --use-standard-socket --daemon &amp;&gt; /dev/null
+fi</string>
 				<key>scriptargtype</key>
 				<integer>0</integer>
 				<key>scriptfile</key>
